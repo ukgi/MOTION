@@ -23,4 +23,59 @@
       <footer><h3>create by ukgi</h3></footer>
     </div>
   </body>
+  <script>
+    const main = document.querySelector(".main");
+    const buttons = document.querySelectorAll("button");
+
+    let isShowForm = false;
+    let formBox = null;
+
+    const createFormBox = () => {
+      formBox = document.createElement("div");
+      formBox.setAttribute("id", "formBox");
+
+      const heading = document.createElement("h1");
+      heading.textContent = "안녕 난 폼 박스야!";
+      formBox.appendChild(heading);
+
+      const closeBtn = document.createElement("button");
+      closeBtn.setAttribute("id", "closeBtn");
+      closeBtn.textContent = "닫기";
+      closeBtn.addEventListener("click", () => {
+        setIsShowForm(false);
+      });
+      formBox.appendChild(closeBtn);
+
+      main.appendChild(formBox);
+    };
+
+    // 폼 박스를 제거하는 함수
+    const removeFormBox = () => {
+      if (formBox) {
+        main.removeChild(formBox);
+        formBox = null;
+      }
+    };
+
+    // 상태에 따라 폼 박스 생성 또는 제거
+    const renderFormBox = (state) => {
+      if (state) {
+        createFormBox();
+      } else {
+        removeFormBox();
+      }
+    };
+
+    // 버튼을 클릭하면 상태를 업데이트한다->폼 박스를 렌더한다
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setIsShowForm(true);
+      });
+    });
+
+    const setIsShowForm = (state) => {
+      isShowForm = state;
+      renderFormBox(isShowForm);
+    };
+  </script>
 </html>
